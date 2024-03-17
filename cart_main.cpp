@@ -36,7 +36,27 @@ Product *chooseProduct(){
     return NULL;
 }
 
+bool checkout(Cart &cart){
+    if(cart.isEmpty()){
+        return false;
+    }
 
+    int total = cart.getTotal();
+    cout<<"Pay in cash";
+
+    int paid;
+    cin>>paid;
+
+    if(paid>= total){
+        cout<< "Change "<<paid - total << endl;
+        cout<<"Thank you for shopping!";
+        return true;
+    }
+    else{
+        cout<<"Not enough cash!";
+        return false;
+    }
+}
 
 int main(){
 
@@ -44,7 +64,7 @@ int main(){
     Cart cart;
     while(true){
         cout<<"Select an action -  (a)dd item, (v)iew cart, (c)heckout"<<endl;
-        cin>>action;
+        cin >> action;
         if(action == 'a'){
             // Todo: Add to cart
             // View all Products + choose Product + add to the cart
@@ -62,7 +82,10 @@ int main(){
         }
         else{
             // Checkout
-
+            cart.viewCart();
+            if(checkout(cart)){
+                break;
+            }
         }
     }
 
